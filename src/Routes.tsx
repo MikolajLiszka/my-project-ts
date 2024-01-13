@@ -4,6 +4,8 @@ import MainPage from './components/mainPage';
 import Login, { AuthContext } from './components/login';
 import { User } from './models/User';
 import Profile from './components/Profile';
+import AlbumDetails from './components/AlbumDetails';
+import PostDetails from './components/PostDetails';
 
 function RouterR() {
   const [user, setUser] = useState<User | null>(null);
@@ -15,6 +17,8 @@ function RouterR() {
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path='/albumDetails/:albumId' element={<AlbumDetails />} />
+          <Route path='/postDetails/:postId' element={<PostDetails />} />
         </Routes>
       </Router>
     </AuthContext.Provider>

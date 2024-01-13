@@ -58,27 +58,27 @@ const Profile = () => {
     <div>
       <h1>Profile</h1>
       {user && (
-        <div>
+        <div className="container mt-5">
           <ul>
-            <li>
+            <li className="list-group">
               <p>Name: {user.name}</p>
             </li>
-            <li>
+            <li className="list-group">
               <p>Username: {user.username}</p>
             </li>
-            <li>
+            <li className="list-group">
               <p>Email: {user.email}</p>
             </li>
-            <li>
+            <li className="list-group">
               <p>Street: {user.address.street}</p>
             </li>
-            <li>
+            <li className="list-group">
               <p>Suite: {user.address.suite}</p>
             </li>
-            <li>
+            <li className="list-group">
               <p>City: {user.address.city}</p>
             </li>
-            <li>
+            <li className="list-group">
               <p>Zipcode: {user.address.zipcode}</p>
             </li>
           </ul>
@@ -86,18 +86,20 @@ const Profile = () => {
           <h2>User Posts</h2>
           <ul>
             {userPosts.map((post: any) => (
-              <li key={post.id}>
-                <p>UserID (TEST): {post.userId}</p>
-                <p>Title: {post.title}</p>
-                <p>Body: {post.body}</p>
-              </li>
+              <Link to={`/postDetails/${post.id}`} key={post.id}>
+                  <li key={post.id}>
+                    <p>UserID (TEST): {post.userId}</p>
+                    <p>Title: {post.title}</p>
+                    <p>Body: {post.body}</p>
+                  </li>
+              </Link>
             ))}
           </ul>
 
           <h2>User Albums</h2>
           <ul>
             {userAlbums.map((albums: any) => (
-              <Link to="/albumDetails">
+              <Link to={`/albumDetails/${albums.id}`} key={albums.id}>
                 <li key={albums.id}>
                   <p>UserID (TEST): {albums.userId}</p>
                   <p>Title: {albums.title}</p>
@@ -107,7 +109,7 @@ const Profile = () => {
           </ul>
 
           <Link to="/">
-            <button>Back</button>
+            <button className="btn btn-primary">Back</button>
           </Link>
         </div>
       )}
