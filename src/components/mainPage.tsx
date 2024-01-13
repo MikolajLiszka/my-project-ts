@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-
+import { AuthContext } from '../components/login';
+import { User } from '../models/User';
+import ProfilePic from '../photos/user.png'
 
 const MainPage = () => {
+    const { user } = useContext(AuthContext) as { user: User | null }; 
+  
     return (
+      <div>
+        <h1>Main Page</h1>
         <div>
-            <h1>Main Page</h1>
+          {user ? (
             <div>
-                <Link to="/login" className="btn btn-primary">Login</Link>
+              <h2>{user.name}</h2>
+              <Link to="/profile"><img src={ProfilePic} alt="" /></Link>
+              <Link to="/login" className="btn btn-primary">
+                Logout
+              </Link>
             </div>
+          ) : (
+            <Link to="/login" className="btn btn-primary">
+              Login
+            </Link>
+          )}
         </div>
-    )
-}
-
-export default MainPage;
-
+      </div>
+    );
+  }
+  
+  export default MainPage;
