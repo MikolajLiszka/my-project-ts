@@ -63,7 +63,7 @@ const AlbumDetails = () => {
           ))}
         </ul>
       </div>
-      <Link to="/profile">
+      <Link to={`/profile/${album?.userId}`}>
         <button className="btn btn-primary">Back</button>
       </Link>
     </div>

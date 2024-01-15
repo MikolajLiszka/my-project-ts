@@ -64,7 +64,7 @@ const PostDetails = () => {
           ))}
         </ul>
       </div>
-      <Link to="/profile">
+      <Link to={`/profile/${post?.userId}`}>
         <button className="btn btn-primary">Back</button>
       </Link>
     </div>
