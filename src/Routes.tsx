@@ -11,6 +11,7 @@ import Albums from './components/Albums'
 import AlbumDetailsAll from './components/AlbumDetailsAll';
 import PhotoDetail from './components/PhotoDetail';
 import PhotoDetailsAll from './components/PhotoDetailsAll'
+import Posts from './components/Posts';
 
 function RouterR() {
   const [user, setUser] = useState<User | null>(null);
@@ -23,6 +24,7 @@ function RouterR() {
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path='/albums' element={<Albums />} />
+          <Route path='/posts' element={<Posts />} />
           <Route path="/profile/:userId" element={<ProfileDetails />} />
           <Route path="/album/:albumId" element={<AlbumDetailsAll />} />
           <Route path='/album/:albumId/:photoId' element={<PhotoDetailsAll />} />
