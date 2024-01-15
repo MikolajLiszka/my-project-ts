@@ -49,7 +49,7 @@ const ProfileDetails = () => {
           `https://jsonplaceholder.typicode.com/albums?userId=${userId}`
         );
         const albumsData = await response.json();
-        setUserAlbums(albumsData); // Just set the albums directly
+        setUserAlbums(albumsData);
       } catch (error) {
         console.error("Error fetching user albums:", error);
       }
