@@ -54,16 +54,17 @@ const AlbumDetails = () => {
 
       <div>
         <h2>Photos</h2>
-        <ul>
+        <ul className="list-unstyled d-flex flex-wrap">
           {photos.map((photos: any) => (
-            <li key={photos.id}>
-              <img src={photos.thumbnailUrl} alt={photos.title} />
-              <p>Title: {photos.title}</p>
-            </li>
+            <Link to={`/albumDetails/${albumId}/${photos.id}`}>
+                <li key={photos.id} className="mx-2 my-2">
+                  <img src={photos.thumbnailUrl} alt={photos.title} />
+                </li>
+            </Link>
           ))}
         </ul>
       </div>
-      <Link to={`/profile/${album?.userId}`}>
+      <Link to="/profile">
         <button className="btn btn-primary">Back</button>
       </Link>
     </div>

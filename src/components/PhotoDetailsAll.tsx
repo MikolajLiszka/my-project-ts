@@ -5,25 +5,26 @@ import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import "../styles/listStyles.css";
 
-const AlbumDetailsAll = () => {
+const PhotoDetailsAll = () => {
+  const { photoId } = useParams();
   const { albumId } = useParams();
   const [photos, setPhotos] = useState<Photo[]>([]);
 
   useEffect(() => {
     const fetchPhotos = async () => {
-      try {
-        const response = await fetch(
-          `https://jsonplaceholder.typicode.com/albums/${albumId}/photos`
-        );
-        const photosData: Photo[] = await response.json();
-        setPhotos(photosData);
-      } catch (error) {
-        console.error("Error fetching photos:", error);
-      }
-    };
+        try {
+          const response = await fetch(
+            `https://jsonplaceholder.typicode.com/photos/${photoId}`
+          );
+          const photoData: Photo = await response.json();
+          setPhotos([photoData]);
+        } catch (error) {
+          console.error("Error fetching photo:", error);
+        }
+      };
 
     fetchPhotos();
-  }, [albumId]);
+  }, [photoId]);
 
   return (
     <div>
@@ -32,14 +33,17 @@ const AlbumDetailsAll = () => {
       <ul className="list-unstyled d-flex flex-wrap">
         {photos.map((photo: Photo) => (
           <li key={photo.id} className="mx-2 my-2">
-            <Link to={`/album/${albumId}/${photo.id}`}>
-              <img src={photo.thumbnailUrl} alt={photo.title} />
-            </Link>
+            <img src={photo.url} alt={photo.title} />
+            <p>Title: {photo.title}</p>
           </li>
         ))}
       </ul>
+
+      <Link to={`/album/${albumId}`}>
+        <button className="btn btn-primary">Back</button>
+      </Link>
     </div>
   );
 };
 
-export default AlbumDetailsAll;
+export default PhotoDetailsAll;

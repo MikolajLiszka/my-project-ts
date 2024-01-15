@@ -9,6 +9,8 @@ import PostDetails from './components/PostDetails';
 import ProfileDetails from './components/ProfileDetails'
 import Albums from './components/Albums'
 import AlbumDetailsAll from './components/AlbumDetailsAll';
+import PhotoDetail from './components/PhotoDetail';
+import PhotoDetailsAll from './components/PhotoDetailsAll'
 
 function RouterR() {
   const [user, setUser] = useState<User | null>(null);
@@ -23,7 +25,9 @@ function RouterR() {
           <Route path='/albums' element={<Albums />} />
           <Route path="/profile/:userId" element={<ProfileDetails />} />
           <Route path="/album/:albumId" element={<AlbumDetailsAll />} />
+          <Route path='/album/:albumId/:photoId' element={<PhotoDetailsAll />} />
           <Route path='/albumDetails/:albumId' element={<AlbumDetails />} />
+          <Route path='/albumDetails/:albumId/:photoId' element={<PhotoDetail />} />
           <Route path='/postDetails/:postId' element={<PostDetails />} />
         </Routes>
       </Router>
