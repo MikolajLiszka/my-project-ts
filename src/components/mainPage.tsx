@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../components/login";
 import { User } from "../models/User";
-import ProfilePic from "../photos/user.png";
 import { Photo } from "../models/Photo";
+import "../styles/container.css";
 import Nav from "./Nav";
 
 const MainPage = () => {
-  const { user } = useContext(AuthContext) as { user: User | null };
   const [users, setUsers] = useState<User[]>([]);
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [searchName, setSearchName] = useState("");
@@ -55,58 +53,43 @@ const MainPage = () => {
   };
 
   return (
-    <div>
-      <h1>Main Page</h1>
+    <div className="container">
       <Nav />
-      <div>
-        {user ? (
-          <div>
-            <h2>{user.name}</h2>
-            <Link to="/profile">
-              <img src={ProfilePic} alt="" />
-            </Link>
-            <Link to="/login" className="btn btn-primary">
-              Logout
-            </Link>
-          </div>
-        ) : (
-          <Link to="/login" className="btn btn-primary">
-            Login
-          </Link>
-        )}
-      </div>
 
-      <div>
+      <div className="text-center my-3 inputContainer">
         <input
           type="text"
           placeholder="Search user"
           value={searchName}
           onChange={(e) => handleSearch(e.target.value)}
+          className="form-control"
         />
       </div>
 
       {searchName && filteredUsers.length > 0 && (
-        <ul>
+        <ul className="list-group listGroup">
           {filteredUsers.map((user) => (
-            <li key={user.id}>
-              <Link to={`/profile/${user.id}`}>
-                <p>Name: {user.name}</p>
+            <li key={user.id} className="list-group-item">
+              <Link to={`/profile/${user.id}`} className="text-decoration-none">
+                <p className="mb-0">Name: {user.name}</p>
               </Link>
             </li>
           ))}
         </ul>
       )}
 
-      <div>
-        <h2>All photos</h2>
-        <ul>
-          {photos.map((photos: any) => (
-            <li key={photos.id}>
-              <img src={photos.url} alt={photos.title} />
-              <p>Title: {photos.title}</p>
-            </li>
-          ))}
-        </ul>
+      <div className="text-center my-4">
+        <h2>All Photos</h2>
+        {photos.map((photo: any) => (
+          <div key={photo.id} className="col-md-6 mx-auto mb-3">
+            <div className="card">
+              <img src={photo.url} alt={photo.title} className="card-img-top" />
+              <div className="card-body">
+                <p className="card-text">{photo.title}</p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

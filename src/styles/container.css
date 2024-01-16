@@ -1,0 +1,63 @@
+.container {
+    width: 1188px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+ul {
+    padding: 0px;
+}
+
+.btnCss {
+    margin-top: 20px;
+}
+
+.login {
+    width: 300px;
+}
+
+.loginText {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.loginForm input {
+    width: 300px;
+}
+
+.imgContainer {
+    width: 600px;
+}
+
+.inputContainer {
+    width: 200px;
+}
+
+.rightContainer {
+    display: flex;
+    position: absolute;
+    top: 5;
+    right: 0;
+}
+
+.rightContainer li {
+    align-self: center;
+}
+
+.listGroup {
+    width: 200px;
+}
+
+.userName {
+    margin: 0px;
+    padding-right: 10px;
+}
+
+.rightContainer a {
+    text-decoration: none;
+
+}
+
+.logoutA {
+    margin: 0px;
+}

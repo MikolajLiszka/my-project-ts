@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { User } from "../models/User";
+import "../styles/container.css";
 
 const ProfileDetails = () => {
   const { userId } = useParams();

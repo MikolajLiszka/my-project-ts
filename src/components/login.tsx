@@ -2,6 +2,8 @@ import React, { useState, useContext, Dispatch, SetStateAction } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../models/User';
+import { Link } from 'react-router-dom';
+import "../styles/container.css"
 
 interface AuthContextType {
   user: User | null;
@@ -13,11 +15,14 @@ export const AuthContext = React.createContext<AuthContextType>({
   setUser: () => {},
 });
 
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
+
+  
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,19 +50,27 @@ const Login = () => {
     }
   };
 
+  
+
   return (
-    <div className="container mt-5">
-      <h2 className="mb-4">Login</h2>
+    <div className="container mt-5 bg-light login">
+      <h2 className="mb-4 loginText">Login</h2>
       <div className="mb-3">
-        <form onSubmit={handleLogin}>
+        <form className='loginForm' onSubmit={handleLogin}>
           <label className="form-label">
             Email:
             <input type="text" value={email} className="form-control" onChange={(e) => setEmail(e.target.value)} />
           </label>
-          <br />
-          <button type="submit" className="btn btn-primary">
-            Login
-          </button>
+          <div className="d-flex justify-content-center align-items-center btnCss">
+            <button type="submit" className="btn btn-primary">
+              Login
+            </button>
+            <Link to="/">
+              <button className="btn btn-primary btn-danger">
+                Back
+              </button>
+            </Link>
+          </div>
           {error && <p>{error}</p>}
         </form>
       </div>
@@ -66,3 +79,4 @@ const Login = () => {
 };
 
 export default Login;
+

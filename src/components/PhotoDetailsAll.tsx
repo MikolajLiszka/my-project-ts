@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import "../styles/listStyles.css";
+import "../styles/container.css";
+
 
 const PhotoDetailsAll = () => {
   const { photoId } = useParams();

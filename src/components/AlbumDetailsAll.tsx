@@ -38,6 +38,10 @@ const AlbumDetailsAll = () => {
           </li>
         ))}
       </ul>
+
+      <Link to={"/albums"}>
+            <button className="btn btn-primary">Back</button>
+      </Link>
     </div>
   );
 };
