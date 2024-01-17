@@ -5,8 +5,8 @@ import Nav from "./Nav";
 
 const Albums = () => {
   const [albums, setAlbums] = useState([]);
-  const [filteredAlbums, setFilteredAlbums] = useState([]);
-  const [searchTitle, setSearchTitle] = useState("");
+  const [filteredAlbums, setFilteredAlbums] = useState<Album[]>([]);
+  const [searchUserName, setSearchUserName] = useState<string>("");
 
   useEffect(() => {
     const fetchAlbums = async () => {
@@ -16,7 +16,7 @@ const Albums = () => {
         );
         const albumsData = await response.json();
         setAlbums(albumsData);
-        setFilteredAlbums(albumsData); 
+        setFilteredAlbums(albumsData);
       } catch (error) {
         console.error("Error fetching albums:", error);
       }
@@ -25,12 +25,31 @@ const Albums = () => {
     fetchAlbums();
   }, []);
 
-  const handleSearch = (title: any) => {
-    setSearchTitle(title);
-    const filtered = albums.filter((album: Album) =>
-      album.title.toLowerCase().includes(title.toLowerCase())
+  const fetchUserName = async (userId: number) => {
+    try {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/users/${userId}`
+      );
+      const userData = await response.json();
+      return userData.name;
+    } catch (error) {
+      console.error("Error fetching user name:", error);
+      return "";
+    }
+  };
+
+  const handleSearchUserName = async (userName: string) => {
+    setSearchUserName(userName);
+    const filtered = await Promise.all(
+      albums.map(async (album: Album) => {
+        const albumUserName = await fetchUserName(album.userId);
+        return { ...album, userName: albumUserName };
+      })
     );
-    setFilteredAlbums(filtered);
+    const result = filtered.filter((album: any) =>
+      album.userName.toLowerCase().includes(userName.toLowerCase())
+    );
+    setFilteredAlbums(result);
   };
 
   return (
@@ -40,9 +59,9 @@ const Albums = () => {
       <div>
         <input
           type="text"
-          placeholder="Search album by title"
-          value={searchTitle}
-          onChange={(e) => handleSearch(e.target.value)}
+          placeholder="Search album by user name"
+          value={searchUserName}
+          onChange={(e) => handleSearchUserName(e.target.value)}
           className="form-control"
         />
       </div>
@@ -58,10 +77,10 @@ const Albums = () => {
       </ul>
 
       <div>
-            <Link to="/">
-              <button className="btn btn-primary">Back</button>
-            </Link>
-          </div>
+        <Link to="/">
+          <button className="btn btn-primary">Back</button>
+        </Link>
+      </div>
     </div>
   );
 };
