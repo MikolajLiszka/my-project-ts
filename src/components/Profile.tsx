@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../components/login";
 import { User } from "../models/User";
 import { Link } from "react-router-dom";
+import "../styles/container.css";
 
 const Profile = () => {
   const { user } = useContext(AuthContext) as { user: User | null };
@@ -56,9 +57,10 @@ const Profile = () => {
 
   return (
     <div>
-      <h1>Profile</h1>
       {user && (
         <div className="container mt-5">
+          <h2>Profile</h2>
+
           <ul>
             <li className="list-group">
               <p>Name: {user.name}</p>
@@ -84,24 +86,30 @@ const Profile = () => {
           </ul>
 
           <h2>User Posts</h2>
-          <ul>
+          <ul className="list-group view">
             {userPosts.map((post: any) => (
-              <Link to={`/postDetails/${post.id}`} key={post.id}>
-                  <li key={post.id}>
-                    <p>UserID (TEST): {post.userId}</p>
-                    <p>Title: {post.title}</p>
-                    <p>Body: {post.body}</p>
-                  </li>
+              <Link
+                to={`/postDetails/${post.id}`}
+                key={post.id}
+                className="text-dark link-offset-2 link-underline link-underline-opacity-0"
+              >
+                <li key={post.id} className="list-group-item">
+                  <p>Title: {post.title}</p>
+                  <p>Body: {post.body}</p>
+                </li>
               </Link>
             ))}
           </ul>
 
           <h2>User Albums</h2>
-          <ul>
+          <ul className="list-group view">
             {userAlbums.map((albums: any) => (
-              <Link to={`/albumDetails/${albums.id}`} key={albums.id}>
-                <li key={albums.id}>
-                  <p>UserID (TEST): {albums.userId}</p>
+              <Link
+                to={`/albumDetails/${albums.id}`}
+                key={albums.id}
+                className="text-dark link-offset-2 link-underline link-underline-opacity-0 black"
+              >
+                <li className="list-group-item" key={albums.id}>
                   <p>Title: {albums.title}</p>
                 </li>
               </Link>

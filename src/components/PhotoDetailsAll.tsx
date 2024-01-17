@@ -29,7 +29,7 @@ const PhotoDetailsAll = () => {
   }, [photoId]);
 
   return (
-    <div>
+    <div className="container">
       <Nav />
       <h2>All photos</h2>
       <ul className="list-unstyled d-flex flex-wrap">

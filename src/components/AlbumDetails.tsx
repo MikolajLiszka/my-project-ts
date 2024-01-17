@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Photo } from "../models/Photo";
 import { Album } from "../models/Album";
+import "../styles/container.css";
 
 const AlbumDetails = () => {
   const { albumId } = useParams();
@@ -42,7 +43,7 @@ const AlbumDetails = () => {
   }, [albumId]);
 
   return (
-    <div>
+    <div className="container">
       <div>
         {album && (
           <div>

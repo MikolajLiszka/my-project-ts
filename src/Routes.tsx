@@ -26,7 +26,7 @@ function RouterR() {
           <Route path="/profile" element={<Profile />} />
           <Route path='/albums' element={<Albums />} />
           <Route path='/posts' element={<Posts />} />
-          <Route path='/:photoId' element={<MainPagePhotoDetail />} />
+          <Route path='/photo/:photoId' element={<MainPagePhotoDetail />} />
           <Route path="/profile/:userId" element={<ProfileDetails />} />
           <Route path="/album/:albumId" element={<AlbumDetailsAll />} />
           <Route path='/album/:albumId/:photoId' element={<PhotoDetailsAll />} />

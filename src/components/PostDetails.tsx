@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Post } from "../models/Post";
 import { Link } from "react-router-dom";
+import "../styles/container.css";
 
 const PostDetails = () => {
   const { postId } = useParams();
@@ -41,7 +42,7 @@ const PostDetails = () => {
   }, [postId]);
 
   return (
-    <div>
+    <div className="container">
       <div>
         {post && (
           <div>

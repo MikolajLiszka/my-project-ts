@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Album } from "../models/Album";
 import Nav from "./Nav";
+import "../styles/container.css"
 
 const Albums = () => {
   const [albums, setAlbums] = useState([]);
@@ -66,11 +67,11 @@ const Albums = () => {
         />
       </div>
 
-      <ul>
+      <ul className="list-group">
         {filteredAlbums.map((album: Album) => (
-          <li key={album.id}>
-            <Link to={`/album/${album.id}`}>
-              <p>Title: {album.title}</p>
+          <li className="list-group-item" key={album.id}>
+            <Link to={`/album/${album.id}`} className="link-offset-2 link-underline link-underline-opacity-0">
+              <p className="titleAlbum">Title: {album.title}</p>
             </Link>
           </li>
         ))}

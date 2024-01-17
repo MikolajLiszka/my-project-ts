@@ -65,3 +65,11 @@ ul {
 .deleteCommentContainer {
     margin-bottom: 20px;
 }
+
+.titleAlbum {
+    margin: 0px;
+}
+
+.view li:hover{
+    background-color: lightgrey;
+}

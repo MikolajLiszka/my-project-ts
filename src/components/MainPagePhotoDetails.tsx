@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import "../styles/listStyles.css";
+import "../styles/container.css";
 
 const MainPagePhotoDetail = () => {
   const { photoId } = useParams();
@@ -26,7 +27,7 @@ const MainPagePhotoDetail = () => {
   }, [photoId]);
 
   return (
-    <div>
+    <div className="container">
       <Nav />
       <h2>All photos</h2>
       <ul className="list-unstyled d-flex flex-wrap">
