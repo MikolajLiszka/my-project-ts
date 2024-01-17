@@ -30,7 +30,7 @@ const MainPage = () => {
   const handleSearch = () => {
     const filtered = photos.filter((photo: any) =>
       photo.albumId.toString().startsWith(searchAlbumId) &&
-      photo.id.toString().startsWith(searchPhotoId)
+      photo.id.toString() === searchPhotoId
     );
     setFilteredPhotos(filtered);
   };
@@ -95,4 +95,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default MainPage

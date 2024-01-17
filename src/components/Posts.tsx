@@ -17,6 +17,8 @@ const Posts = () => {
   const [addedPostTitle, setAddedPostTitle] = useState("");
   const [addedPostBody, setAddedPostBody] = useState("");
   const { user } = useContext(AuthContext);
+  
+  
 
   useEffect(() => {
     const fetchPostData = async () => {
@@ -84,20 +86,20 @@ const Posts = () => {
             <p>Email: {comment.email}</p>
             <p>Body: {comment.body}</p>
             {user && user.name === comment.name && (
-              <button
-                onClick={() => deleteComment(postId, comment.id)}
-                className="btn btn-primary btnCss"
-              >
-                Delete Comment
-              </button>
+              <div className="deleteCommentContainer">
+                <button
+                  onClick={() => deleteComment(postId, comment.id)}
+                  className="btn btn-primary btn-danger btnCss"
+                >
+                  Delete Comment
+                </button>
+              </div>
             )}
           </li>
         ))}
       </ul>
     );
   };
-
-  const sortedPosts = [...posts].sort((a, b) => b.id - a.id);
 
   const addedPostTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddedPostTitle(e.target.value);
@@ -107,19 +109,36 @@ const Posts = () => {
     setAddedPostBody(e.target.value);
   };
 
+  const findNextAvailableId = () => {
+    const allPostIds = posts.map((post) => post.id);
+    let nextId = 1;
+  
+    while (allPostIds.includes(nextId)) {
+      nextId++;
+    }
+  
+    return nextId;
+  };
+  
   const addNewPost = () => {
-    setPosts((prevPosts) => [
-      ...prevPosts,
-      {
-        userId: user?.id || 1,
-        id: prevPosts.length + 1,
-        title: addedPostTitle,
-        body: addedPostBody,
-      },
-    ]);
-
+    if (!user) {
+      console.warn("User is not logged in. Cannot add posts.");
+      return;
+    }
+  
+    const newPost: Post = {
+      userId: user.id,
+      id: findNextAvailableId(),
+      title: addedPostTitle,
+      body: addedPostBody,
+    };
+  
+    setPosts((prevPosts) => [...prevPosts, newPost]);
+  
     setAddedPostTitle("");
     setAddedPostBody("");
+  
+    console.log(`Added new post: ${JSON.stringify(newPost)}`);
   };
 
   const commentChange = (
@@ -161,6 +180,21 @@ const Posts = () => {
     setComments(updatedComments);
   };
 
+  const deletePost = (postId: number) => {
+    if (!user) {
+      console.warn("User is not logged in. Cannot delete posts.");
+      return;
+    }
+
+    const updatedPosts = posts.filter((post) => post.id !== postId);
+
+    setPosts(updatedPosts);
+  
+    console.log(`Deleted post with postId: ${postId}`);
+  };
+  
+  
+
   return (
     <div className="container">
       <Nav />
@@ -190,15 +224,24 @@ const Posts = () => {
         </div>
       </div>
       <ul>
-        {sortedPosts.map((post: Post) => (
+      {posts.slice().reverse().map((post: Post) => (
           <li key={post.id} className="container p-5 my-5 border">
             <div>
               <h2>Post</h2>
               <Link to={"/profileDetails"} className="text-decoration-none">
                 <p>{getUserName(post.userId)}</p>
               </Link>
+              <p>{post.id}</p>
               <p>Title: {post.title}</p>
               <p>Body: {post.body}</p>
+              {user && user.id === post.userId && (
+                <button
+                onClick={() => deletePost(post.id)}
+                className="btn btn-danger"
+              >
+                Delete Post
+              </button>
+              )}
             </div>
             <div>
               <h2>Comments</h2>

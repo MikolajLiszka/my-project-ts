@@ -61,3 +61,7 @@ ul {
 .logoutA {
     margin: 0px;
 }
+
+.deleteCommentContainer {
+    margin-bottom: 20px;
+}
